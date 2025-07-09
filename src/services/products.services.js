@@ -4,7 +4,7 @@ export const getAllProducts = () => {
     return model.getAllProducts();
 };
 
-export const getProductById = () => {
-    return model.getProductById();
+export const getProductById = (id) => {
+    return model.getProductById(id);
 }
 
