@@ -33,6 +33,8 @@ export const searchProducts = (req, res) => {
     res.json(productsFiltered);
 };
 
+
+//OPTIMIZAR
 export const getProductById = async (req, res) => {
     const id = req.params.id;
     console.log("ID recibido:", id);
@@ -53,5 +55,20 @@ export const createProduct = async (req, res) => {
     }
     const newProduct = Model.createProduct({ name, price, categories});
     res.status(201).json(newProduct);
+}
+
+export const deleteProduct = async (req, res) => {
+    const id = req.params.id;
+
+    const product = await Model.getProductById(id);
+
+    if (!product){
+        res.status(404).json({error: 'No existe el producto'});
+    }
+
+    Model.deleteProduct(id)
+
+    res.json({message:"producto eliminado",product});
+
 }
 

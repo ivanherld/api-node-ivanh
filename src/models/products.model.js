@@ -1,6 +1,6 @@
 import { db } from './firebase.js';
 
-import { collection, getDocs, doc, getDoc, addDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, addDoc, deleteDoc, setDoc } from 'firebase/firestore';
 
 const productsCollection = collection(db, "products");
 
@@ -27,18 +27,20 @@ export const getProductById = async (id) => {
 }
 
 //Método para guardar un producto
-export const addProduct = async (product) => {
+export const addProduct = async (id, dataProduct) => {
     try{
-        await addDoc(productsCollection, product);
+        const docRef = doc( db, "products", String(id));
+        await setDoc(docRef, dataProduct);
+        console.log("Producto agregado con ID: ", id);
     } catch (error) {
         console.error("Error al cargar el producto.", error);
     }
-    
 } 
 
 export const deleteProduct = async (id) => {
     try{
         await deleteDoc(doc(productsCollection, id));
+        console.log("Producto eliminado exitosamente.");
     } catch (error){
         console.error(`Error al eliminar el producto con ID ${id}:`, error)
     }

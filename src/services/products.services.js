@@ -17,19 +17,22 @@ export const createProduct = async (productData) => {
     const maxId = ids.length > 0 ? Math.max(...ids) : 0;
     const nextId = maxId + 1;
 
+    const idProduct = nextId;
 
-    const newProduct = {
-        id: nextId,
+    const dataNewProduct = {
         name: productData.name,
         price: productData.price,
         categories: productData.categories,
     };
 
-    model.addProduct(newProduct);
+    model.addProduct(idProduct, dataNewProduct);
 
-    return newProduct;
+    return dataNewProduct;
     } catch (error){
         console.error("Error al crear producto.", error);
     }  
 }
 
+export const deleteProduct = async (id) => {
+    return model.deleteProduct(id);
+}
