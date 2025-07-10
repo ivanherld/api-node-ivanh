@@ -1,6 +1,6 @@
 import { db } from './firebase.js';
 
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, addDoc, deleteDoc } from 'firebase/firestore';
 
 const productsCollection = collection(db, "products");
 
@@ -24,4 +24,23 @@ export const getProductById = async (id) => {
         //throw error; no tiramos exception por si detengo el servidor
     }
     //return products.find((item) => item.id == id);
+}
+
+//Método para guardar un producto
+export const addProduct = async (product) => {
+    try{
+        await addDoc(productsCollection, product);
+    } catch (error) {
+        console.error("Error al cargar el producto.", error);
+    }
+    
+} 
+
+export const deleteProduct = async (id) => {
+    try{
+        await deleteDoc(doc(productsCollection, id));
+    } catch (error){
+        console.error(`Error al eliminar el producto con ID ${id}:`, error)
+    }
+    
 }

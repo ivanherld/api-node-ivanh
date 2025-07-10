@@ -45,3 +45,13 @@ export const getProductById = async (req, res) => {
     res.json(product);
 };
 
+export const createProduct = async (req, res) => {
+    const { name, price, categories} = req.body;
+
+    if(!name || !price || !categories){
+        return res.status(400).json({error: 'Se requieren los 3 campos: Nombre, precio y lista de categorias.'});
+    }
+    const newProduct = Model.createProduct({ name, price, categories});
+    res.status(201).json(newProduct);
+}
+
