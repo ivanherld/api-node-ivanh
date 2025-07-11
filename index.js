@@ -18,10 +18,17 @@ app.get('/', (req, res) => {
     res.json({message: "Bienvenidos a nuestra API REST"});
 });
 
+import authRouter from './src/routes/auth.routes.js';
+
+app.use(bodyParser.json());
+app.use('/auth', authRouter);
+
 import productsRouter from './src/routes/products.router.js';
-app.use('/api', productsRouter);
+app.use('/api', authentication, productsRouter);
 
 import notFound from './src/middlewares/not-found.js';
+import bodyParser from 'body-parser';
+import { authentication } from './src/middlewares/authentication.js';
 app.use(notFound);
 
 const PORT = process.env.PORT || 3001;

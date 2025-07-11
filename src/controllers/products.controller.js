@@ -15,12 +15,14 @@ export const getAllProducts = async (req, res) => {
     res.json({products});
 };
 
-export const searchProducts = (req, res) => {
+export const searchProducts = async (req, res) => {
     const {name} = req.query;
 
     if (!name){
         return res.status(400).json({error: 'El nombre es requerido'});
     };
+
+    const products = await Model.getAllProducts();
 
     const productsFiltered = products.filter(item =>
          item.name.toLowerCase().includes(name.toLowerCase())
@@ -34,7 +36,7 @@ export const searchProducts = (req, res) => {
 };
 
 
-//OPTIMIZAR
+//OPTIMIZAR LLEVANDO A UTILITIES
 export const getProductById = async (req, res) => {
     const id = req.params.id;
     console.log("ID recibido:", id);
@@ -53,7 +55,7 @@ export const createProduct = async (req, res) => {
     if(!name || !price || !categories){
         return res.status(400).json({error: 'Se requieren los 3 campos: Nombre, precio y lista de categorias.'});
     }
-    const newProduct = Model.createProduct({ name, price, categories});
+    const newProduct = await Model.createProduct({ name, price, categories});
     res.status(201).json(newProduct);
 }
 
@@ -70,5 +72,20 @@ export const deleteProduct = async (req, res) => {
 
     res.json({message:"producto eliminado",product});
 
+}
+
+export const updateProduct = async (req, res) => {
+    const id = req.params.id;
+    const updateData = req.body;
+
+    const product = await Model.getProductById(id);
+
+    if (!product){
+        res.status(404).json({error: 'No existe el producto'});
+    }
+
+    Model.updateProduct(id, updateData);
+
+    res.json({ message: "Producto modificado"});
 }
 

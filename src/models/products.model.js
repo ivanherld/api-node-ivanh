@@ -27,11 +27,10 @@ export const getProductById = async (id) => {
 }
 
 //Método para guardar un producto
-export const addProduct = async (id, dataProduct) => {
-    try{
-        const docRef = doc( db, "products", String(id));
-        await setDoc(docRef, dataProduct);
-        console.log("Producto agregado con ID: ", id);
+export const createProduct = async (dataProduct) => {
+    try{ 
+        await addDoc(dataProduct);
+        
     } catch (error) {
         console.error("Error al cargar el producto.", error);
     }
@@ -45,4 +44,21 @@ export const deleteProduct = async (id) => {
         console.error(`Error al eliminar el producto con ID ${id}:`, error)
     }
     
+}
+
+//Con método PUT
+export const updateProduct = async (id, productData) => {
+    try{
+        const productRef = doc(productsCollection, id);
+        const snapshot = await getDoc(productRef);
+
+        if (!snapshot.exists()) {
+            return false;
+        }
+
+        await setDoc(productRef, productData);
+        return {id, ...productData };
+    } catch (error) {
+        console.error(error);
+    }
 }
