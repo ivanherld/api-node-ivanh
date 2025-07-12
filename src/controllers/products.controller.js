@@ -36,10 +36,9 @@ export const searchProducts = async (req, res) => {
 };
 
 
-//OPTIMIZAR LLEVANDO A UTILITIES
 export const getProductById = async (req, res) => {
     const id = req.params.id;
-    console.log("ID recibido:", id);
+
     const product = await Model.getProductById(id);
 
     if (!product){
@@ -70,7 +69,7 @@ export const deleteProduct = async (req, res) => {
 
     Model.deleteProduct(id)
 
-    res.json({message:"producto eliminado",product});
+    res.json({message:"producto eliminado", product});
 
 }
 

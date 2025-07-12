@@ -1,10 +1,11 @@
 import { generateToken } from "../utils/token-generator.js";
+import bcrypt from 'bcrypt';
 
 //HASHEARLO!
 const default_user = {
     id: 1,
-    email: "user@email.com",
-    password: "strongPass123"
+    email: "user@email.com"
+    //password: "strongPass123"
 }
 
 export const login = async (req, res) => {
@@ -12,10 +13,12 @@ export const login = async (req, res) => {
 
     //Se debe verificar las credenciales del usuario
 
+    const isMatch = bcrypt.compare(password, process.env.ADMIN_PASS_HASH);
+
     //Ejemplo de usuario autenticado
     const user = { id: 1, email };
 
-    if (email === default_user.email && password === default_user.password) {
+    if (email === default_user.email && isMatch) {
         const token = generateToken(user);
         res.json({ token });
     } else {
