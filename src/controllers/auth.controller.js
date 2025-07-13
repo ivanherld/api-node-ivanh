@@ -1,7 +1,7 @@
 import { generateToken } from "../utils/token-generator.js";
 import bcrypt from 'bcrypt';
 
-//HASHEARLO!
+
 const default_user = {
     id: 1,
     email: "user@email.com"
@@ -11,7 +11,7 @@ const default_user = {
 export const login = async (req, res) => {
     const { email, password } = req.body;
 
-    //Se debe verificar las credenciales del usuario
+    //Se debe verificar las credenciales del usuario, se utilizo HASH con bcrypt 
 
     const isMatch = bcrypt.compare(password, process.env.ADMIN_PASS_HASH);
 

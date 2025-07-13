@@ -46,7 +46,6 @@ export const deleteProduct = async (id) => {
     
 }
 
-//Con método PUT
 export const updateProduct = async (id, productData) => {
     try{
         const productRef = doc(productsCollection, id);
@@ -62,3 +61,4 @@ export const updateProduct = async (id, productData) => {
         console.error(error);
     }
 }
+

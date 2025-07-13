@@ -88,3 +88,15 @@ export const updateProduct = async (req, res) => {
     res.json({ message: "Producto modificado"});
 }
 
+export const maxPrice = async (req, res) => {
+    const products = await Model.getAllProducts();
+
+    const precioMax = Math.max(...products.map(p => p.price));
+
+    
+    const productsFiltered = products.filter(
+        item => item.price === precioMax
+    );
+
+    res.json(productsFiltered);
+}
