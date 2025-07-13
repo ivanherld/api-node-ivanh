@@ -9,16 +9,13 @@ import {
     getProductById,
     createProduct,
     deleteProduct,
-    updateProduct,
-    maxPrice 
+    updateProduct
 } from "../controllers/products.controller.js";
 
 
 router.get("/products", getAllProducts);
 
 router.get('/products/search', searchProducts);
-
-router.get("/products/maxPrice", maxPrice);
 
 router.get("/products/:id", getProductById);
 

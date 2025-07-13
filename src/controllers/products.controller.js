@@ -16,24 +16,56 @@ export const getAllProducts = async (req, res) => {
 };
 
 export const searchProducts = async (req, res) => {
-    const {name} = req.query;
+  const { name, max, min, soloMax, soloMin } = req.query;
 
-    if (!name){
-        return res.status(400).json({error: 'El nombre es requerido'});
-    };
+  if (name !== undefined && name.trim() === '') {
+    return res.status(400).json({ error: 'El nombre es requerido' });
+  }
 
-    const products = await Model.getAllProducts();
+  if ((min && isNaN(min)) || (max && isNaN(max))) {
+    return res.status(400).json({ error: 'Los valores de min y max deben ser numéricos' });
+  }
 
-    const productsFiltered = products.filter(item =>
-         item.name.toLowerCase().includes(name.toLowerCase())
+  const products = await Model.getAllProducts();
+  let productsFiltered = [...products]; // <-- declaración al principio
+
+  if (soloMax === 'true') {
+    const precioMax = Math.max(...products.map(p => p.price));
+    productsFiltered = products.filter(p => p.price === precioMax);
+  }
+
+  if (soloMin === 'true') {
+    const precioMin = Math.min(...products.map(p => p.price));
+    productsFiltered = products.filter(p => p.price === precioMin);
+  }
+
+  if (min) {
+    productsFiltered = productsFiltered.filter(p => p.price >= Number(min));
+  }
+
+  if (max) {
+    productsFiltered = productsFiltered.filter(p => p.price <= Number(max));
+  }
+
+  if (min && max) {
+    productsFiltered = productsFiltered.filter(p =>
+      p.price >= Number(min) && p.price <= Number(max)
     );
+  }
 
-    if (productsFiltered.length == 0){
-        return res.status(404).json({ error: "No se encontraron productos"});
-    };
+  if (name) {
+    productsFiltered = productsFiltered.filter(item =>
+      item.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }
 
-    res.json(productsFiltered);
+  if (productsFiltered.length === 0) {
+    return res.status(404).json({ error: "No se encontraron productos" });
+  }
+
+  res.json(productsFiltered);
 };
+
 
 
 export const getProductById = async (req, res) => {
@@ -88,15 +120,3 @@ export const updateProduct = async (req, res) => {
     res.json({ message: "Producto modificado"});
 }
 
-export const maxPrice = async (req, res) => {
-    const products = await Model.getAllProducts();
-
-    const precioMax = Math.max(...products.map(p => p.price));
-
-    
-    const productsFiltered = products.filter(
-        item => item.price === precioMax
-    );
-
-    res.json(productsFiltered);
-}

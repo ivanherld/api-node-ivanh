@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.json({message: "Bienvenidos a nuestra API REST"});
+    res.json({message: "Bienvenidos a la API REST de Iván"});
 });
 
 import authRouter from './src/routes/auth.routes.js';

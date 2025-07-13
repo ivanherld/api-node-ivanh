@@ -23,24 +23,38 @@ npm install
 
 
 ## En GET:
-".api/products" = Se despliegan todos los productos
-".api/products/:id = se localiza el producto de un determinado id
-".api/products/search$name=... = Funcionalidad de busqueda 
+```.api/products``` = Se despliegan todos los productos
+```.api/products/:id``` = se localiza el producto de un determinado id
+```.api/products/search$name=...``` = Funcionalidad de busqueda 
+La funcionalidad de busqueda tiene diferentes queries a probar:
+    `- ```search$soloMax=true``` -> Busca el maximo en precio `
+    `- ```search$soloMin=true``` -> Busca el minimo en precio`
+    `- ```search$min=valor``` -> Busca los productos de precio mayor al declarado`
+    `- ```search$max=valor``` -> Busca los productos de precio menor al declarado`
+    `- ```search$min=valor&max=valor``` -> Busca los productos de precio menor al declarado`
+    `- ```search$name=..``` -> Busca por nombre de producto`
+    
 
 ## En POST:
-".api/products" = Se carga un nuevo producto con un JSON en el body indicando nombre, precio (price) y categorias (categories en forma de lista)
+```.api/products``` = Se carga un nuevo producto con un JSON en el body indicando nombre, precio (price) y categorias (categories en forma de lista)
 
 ## En PUT:
-".api/products/:id = Se carga en el body las modificaciones para el id solicitado.
+```.api/products/:id``` = Se carga en el body las modificaciones para el id solicitado.
 
 ## En DELETE:
-".api/products/:id = Se elimina por delete el id seleccionado
+```.api/products/:id``` = Se elimina por delete el id seleccionado
 
 # Autenticación:
-## Las credenciales como administrador son: 
+## Las credenciales como administrador son (En el código la contraseña esta hasheada): 
 
 # email: "user@email.com"
 # password: "strongPass123"
 
+```{
+    "id": 1,
+    "email": "user@email.com",
+    "password": "strongPass123"
+}```
+
 # En POST:
-# ".api/login" Se pasa en un JSON las credenciales y se obtiene el token válido
+ ```.api/login``` Se pasa en un JSON las credenciales y se obtiene el token válido
