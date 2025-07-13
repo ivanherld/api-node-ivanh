@@ -23,9 +23,10 @@ npm install
 
 
 ## En GET:
-   ` ```.api/products``` = Se despliegan todos los productos 
-    ```.api/products/:id``` = se localiza el producto de un determinado id
-    ```.api/products/search$name=...``` = Funcionalidad de busqueda `
+- `.api/products` = Se despliegan todos los productos  
+- `.api/products/:id` = Se localiza el producto de un determinado id  
+- `.api/products/search$name=...` = Funcionalidad de búsqueda  
+
 
 La funcionalidad de busqueda tiene diferentes queries a probar:
 
@@ -48,7 +49,7 @@ La funcionalidad de busqueda tiene diferentes queries a probar:
 ```.api/products/:id``` = Se elimina por delete el id seleccionado
 
 # Autenticación:
-## Las credenciales como administrador son (En el código la contraseña esta hasheada): 
+Las credenciales como administrador son (En el código la contraseña esta hasheada): 
 
 email: "user@email.com"
 password: "strongPass123"
