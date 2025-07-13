@@ -9,7 +9,7 @@ npm install
 
 ```
 ## Tecnologías utilizadas: 
-   - `bcrypt`
+    - `bcrypt`
     - `body-parser`
     - `cors`
     - `dotenv`
