@@ -9,15 +9,16 @@ npm install
 
 ```
 ## Tecnologías utilizadas: 
-    `-bcrypt
-    `-body-parser`
-    `-cors`
-    `-dotenv`
-    `-express`
-    `-firebase`
-    `-jsonwebtoken`
+   - `bcrypt`
+    - `body-parser`
+    - `cors`
+    - `dotenv`
+    - `express`
+    - `firebase`
+    - `jsonwebtoken`
 
-# URL en render: https://api-node-ivanh.onrender.com
+
+## URL en render: https://api-node-ivanh.onrender.com
 
 # Rutas disponibles:
 
