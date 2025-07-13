@@ -23,16 +23,19 @@ npm install
 
 
 ## En GET:
-```.api/products``` = Se despliegan todos los productos
-```.api/products/:id``` = se localiza el producto de un determinado id
-```.api/products/search$name=...``` = Funcionalidad de busqueda 
+   ` ```.api/products``` = Se despliegan todos los productos 
+    ```.api/products/:id``` = se localiza el producto de un determinado id
+    ```.api/products/search$name=...``` = Funcionalidad de busqueda `
+
 La funcionalidad de busqueda tiene diferentes queries a probar:
-    `- ```search$soloMax=true``` -> Busca el maximo en precio `
-    `- ```search$soloMin=true``` -> Busca el minimo en precio`
-    `- ```search$min=valor``` -> Busca los productos de precio mayor al declarado`
-    `- ```search$max=valor``` -> Busca los productos de precio menor al declarado`
-    `- ```search$min=valor&max=valor``` -> Busca los productos de precio menor al declarado`
-    `- ```search$name=..``` -> Busca por nombre de producto`
+
+- `search$soloMax=true` -> Busca el máximo en precio  
+- `search$soloMin=true` -> Busca el mínimo en precio  
+- `search$min=valor` -> Busca los productos de precio mayor al declarado  
+- `search$max=valor` -> Busca los productos de precio menor al declarado  
+- `search$min=valor&max=valor` -> Busca los productos dentro del rango declarado  
+- `search$name=..` -> Busca por nombre de producto  
+
     
 
 ## En POST:
@@ -47,14 +50,18 @@ La funcionalidad de busqueda tiene diferentes queries a probar:
 # Autenticación:
 ## Las credenciales como administrador son (En el código la contraseña esta hasheada): 
 
-# email: "user@email.com"
-# password: "strongPass123"
-
-```{
-    "id": 1,
-    "email": "user@email.com",
-    "password": "strongPass123"
-}```
+email: "user@email.com"
+password: "strongPass123"
 
 # En POST:
- ```.api/login``` Se pasa en un JSON las credenciales y se obtiene el token válido
+
+`.api/login`  
+Se pasa en un JSON las credenciales y se obtiene el token válido
+
+```json
+{
+  "id": 1,
+  "email": "user@email.com",
+  "password": "strongPass123"
+}
+
