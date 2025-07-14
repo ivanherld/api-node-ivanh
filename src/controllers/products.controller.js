@@ -120,3 +120,25 @@ export const updateProduct = async (req, res) => {
     res.json({ message: "Producto modificado"});
 }
 
+export const updatePartialProduct = async (req, res) => {
+  const  id  = req.params.id;
+  const camposAActualizar = req.body;
+
+  try {
+    const producto = await Model.getProductById(id);
+    if (!producto) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+
+    // Acá se actualiza solo los campos que llegaron
+    const productoActualizado = { ...producto, ...camposAActualizar };
+
+    await Model.updateProduct(id, productoActualizado);
+
+    res.json({ mensaje: 'Producto actualizado', data: productoActualizado });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al actualizar el producto' });
+  }
+};
+

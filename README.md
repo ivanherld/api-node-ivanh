@@ -44,7 +44,10 @@ La funcionalidad de busqueda tiene diferentes queries a probar:
 ```.api/products``` = Se carga un nuevo producto con un JSON en el body indicando nombre, precio (price) y categorias (categories en forma de lista)
 
 ## En PUT:
-```.api/products/:id``` = Se carga en el body las modificaciones para el id solicitado.
+```.api/products/:id``` = Se carga en el body las modificaciones para el id solicitado, modificando todo el producto.
+
+## En PATCH:
+```.api/products/:id``` = Se carga en el body las modificaciones para el id solicitado, modificando solo los cambios que se desean en el producto.
 
 ## En DELETE:
 ```.api/products/:id``` = Se elimina por delete el id seleccionado

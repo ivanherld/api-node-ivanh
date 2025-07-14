@@ -9,7 +9,8 @@ import {
     getProductById,
     createProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    updatePartialProduct
 } from "../controllers/products.controller.js";
 
 
@@ -25,5 +26,6 @@ router.delete("/products/:id", deleteProduct);
 
 router.put("/products/:id", updateProduct);
 
+router.patch("/products/:id", updatePartialProduct);
 
 export default router;
