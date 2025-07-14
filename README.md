@@ -60,7 +60,7 @@ password: "strongPass123"
 
 # En POST:
 
-`.api/login`  
+`.auth/login`  
 Se pasa en un JSON las credenciales y se obtiene el token válido
 
 ```json
